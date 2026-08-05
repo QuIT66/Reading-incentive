@@ -1,5 +1,5 @@
 {
-  "_version": 3,
+  "_version": 5,
   "points": 0,
   "goals": [
     { "name": "小米手机", "icon": "📱", "points": 10000 }
@@ -35,11 +35,9 @@
     {
       "title": "📚 常驻任务", "type": "resident",
       "tasks": [
-        { "name": "哈利波特·魔法石", "type": "推荐", "points": 165, "icon": "⚡" },
-        { "name": "活着", "type": "自选", "points": 80, "icon": "📜" },
-        { "name": "三体 I", "type": "自选", "points": 100, "icon": "🌌" },
-        { "name": "平凡的世界 I", "type": "自选", "points": 165, "icon": "🏔" },
-        { "name": "聊斋志异", "type": "自选(协商)", "points": "按篇", "icon": "👻" }
+        { "name": "活着", "type": "推荐", "points": 110, "icon": "📜" },
+        { "name": "三体 I", "type": "推荐", "points": 180, "icon": "🌌" },
+        { "name": "平凡的世界 I", "type": "推荐", "points": 300, "icon": "🏔" }
       ]
     }
   ],
