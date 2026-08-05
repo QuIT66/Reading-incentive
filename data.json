@@ -1,5 +1,5 @@
 {
-  "_version": 1,
+  "_version": 2,
   "points": 0,
   "goals": [
     { "name": "小米手机", "icon": "📱", "points": 10000 }
@@ -30,7 +30,9 @@
     },
     {
       "title": "📚 常驻任务", "type": "resident",
-      "tasks": []
+      "tasks": [
+        { "name": "哈利波特", "type": "推荐", "points": 100, "icon": "⚡" }
+      ]
     }
   ],
   "shop": [
