@@ -1,43 +1,36 @@
 {
   "_version": 1,
-  "points": 1250,
+  "points": 0,
   "goals": [
     { "name": "小米手机", "icon": "📱", "points": 10000 }
   ],
-  "ledger": [
-    { "name": "小王子", "date": "8/1", "amount": 20 },
-    { "name": "我想吃掉你的胰脏", "date": "8/2", "amount": 56 },
-    { "name": "年级排名 (第10名)", "date": "7/15", "amount": 1000 },
-    { "name": "奶茶", "date": "8/3", "amount": -20 }
-  ],
+  "ledger": [],
   "taskGroups": [
     {
       "title": "🏆 挑战", "type": "challenge",
       "groups": {
-        "activated": [
-          { "name": "年级排名", "type": "考试", "detail": "第10名 → +1000", "points": 1000, "icon": "🏅" },
-          { "name": "班长", "type": "每月", "detail": "300分/月", "points": 300, "icon": "👑" }
-        ],
+        "activated": [],
         "pending": [
-          { "name": "年级前 5", "type": "考试", "detail": "3500分", "points": 3500, "icon": "🏅" },
+          { "name": "年级第 1 名", "type": "考试", "detail": "10000分", "points": 10000, "icon": "🥇" },
+          { "name": "年级第 2 名", "type": "考试", "detail": "5000分", "points": 5000, "icon": "🥈" },
+          { "name": "年级第 3 名", "type": "考试", "detail": "4500分", "points": 4500, "icon": "🥉" },
+          { "name": "年级前 10 名", "type": "考试", "detail": "1500~3500分", "points": "1500~3500", "icon": "🏅" },
+          { "name": "年级前 100 名", "type": "考试", "detail": "110~1000分", "points": "110~1000", "icon": "🏅" },
+          { "name": "年级前 200 名", "type": "考试", "detail": "100~400分", "points": "100~400", "icon": "🏅" },
+          { "name": "进步 50+ 名", "type": "进步奖", "detail": "500分", "points": 500, "icon": "📈" },
+          { "name": "班长", "type": "每月", "detail": "300分/月", "points": 300, "icon": "👑" },
+          { "name": "其他班委/课代表", "type": "每月", "detail": "150分/月", "points": 150, "icon": "📋" },
           { "name": "校级竞赛获奖", "type": "竞赛", "detail": "500~2000分", "points": "500~2000", "icon": "🥇" }
         ]
       }
     },
     {
       "title": "⏳ 悬赏任务", "type": "bounty",
-      "tasks": [
-        { "name": "A Room of One's Own", "type": "镇场子", "points": 1026, "icon": "📖", "deadline": "9/15", "expired": false },
-        { "name": "苏菲的世界", "type": "镇场子", "points": 338, "icon": "📖", "deadline": "8/10", "expired": true }
-      ]
+      "tasks": []
     },
     {
       "title": "📚 常驻任务", "type": "resident",
-      "tasks": [
-        { "name": "哈利·波特与魔法石", "type": "推荐", "points": 100, "icon": "📖" },
-        { "name": "你当像鸟飞往你的山", "type": "推荐", "points": 156, "icon": "📖" },
-        { "name": "自选书 (本月 2/3)", "type": "自选", "points": "协商", "icon": "📚" }
-      ]
+      "tasks": []
     }
   ],
   "shop": [
