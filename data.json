@@ -1,0 +1,64 @@
+{
+  "_version": 1,
+  "points": 1250,
+  "goals": [
+    { "name": "小米手机", "icon": "📱", "points": 10000 }
+  ],
+  "ledger": [
+    { "name": "小王子", "date": "8/1", "amount": 20 },
+    { "name": "我想吃掉你的胰脏", "date": "8/2", "amount": 56 },
+    { "name": "年级排名 (第10名)", "date": "7/15", "amount": 1000 },
+    { "name": "奶茶", "date": "8/3", "amount": -20 }
+  ],
+  "taskGroups": [
+    {
+      "title": "🏆 挑战", "type": "challenge",
+      "groups": {
+        "activated": [
+          { "name": "年级排名", "type": "考试", "detail": "第10名 → +1000", "points": 1000, "icon": "🏅" },
+          { "name": "班长", "type": "每月", "detail": "300分/月", "points": 300, "icon": "👑" }
+        ],
+        "pending": [
+          { "name": "年级前 5", "type": "考试", "detail": "3500分", "points": 3500, "icon": "🏅" },
+          { "name": "校级竞赛获奖", "type": "竞赛", "detail": "500~2000分", "points": "500~2000", "icon": "🥇" }
+        ]
+      }
+    },
+    {
+      "title": "⏳ 悬赏任务", "type": "bounty",
+      "tasks": [
+        { "name": "A Room of One's Own", "type": "镇场子", "points": 1026, "icon": "📖", "deadline": "9/15", "expired": false },
+        { "name": "苏菲的世界", "type": "镇场子", "points": 338, "icon": "📖", "deadline": "8/10", "expired": true }
+      ]
+    },
+    {
+      "title": "📚 常驻任务", "type": "resident",
+      "tasks": [
+        { "name": "哈利·波特与魔法石", "type": "推荐", "points": 100, "icon": "📖" },
+        { "name": "你当像鸟飞往你的山", "type": "推荐", "points": 156, "icon": "📖" },
+        { "name": "自选书 (本月 2/3)", "type": "自选", "points": "协商", "icon": "📚" }
+      ]
+    }
+  ],
+  "shop": [
+    { "section": "🍔 食", "items": [
+      { "name": "辣条 / 雪糕 / 奶茶", "icon": "🍬", "cost": "5~30", "costNum": 0 },
+      { "name": "麦当劳 / 外卖", "icon": "🍔", "cost": "50~150", "costNum": 0 },
+      { "name": "火锅 / 烤肉", "icon": "🍲", "cost": "200~400", "costNum": 0 }
+    ]},
+    { "section": "🎁 物", "items": [
+      { "name": "一本书", "icon": "📖", "cost": 100 },
+      { "name": "电影票", "icon": "🎬", "cost": 200 },
+      { "name": "品牌运动鞋", "icon": "👟", "cost": 1000 },
+      { "name": "拼豆图纸程序", "icon": "🎨", "cost": 2000 },
+      { "name": "降噪耳机", "icon": "🎧", "cost": 3500 },
+      { "name": "短途旅行", "icon": "🎢", "cost": 5000 },
+      { "name": "小米平板", "icon": "📋", "cost": 7000 },
+      { "name": "小米手机 / 电脑", "icon": "💻", "cost": 10000 }
+    ]},
+    { "section": "🔓 系统", "items": [
+      { "name": "任务系统 v2.0 预览", "icon": "👁", "cost": 500, "desc": "查看高级任务详情" },
+      { "name": "任务系统 v2.0 激活", "icon": "🔓", "cost": 1500, "desc": "永久解锁接取权" }
+    ]}
+  ]
+}
