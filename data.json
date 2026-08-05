@@ -1,5 +1,5 @@
 {
-  "_version": 2,
+  "_version": 3,
   "points": 0,
   "goals": [
     { "name": "小米手机", "icon": "📱", "points": 10000 }
@@ -26,12 +26,20 @@
     },
     {
       "title": "⏳ 悬赏任务", "type": "bounty",
-      "tasks": []
+      "tasks": [
+        { "name": "哈利波特·魔法石", "type": "限时", "points": 220, "icon": "⚡", "deadline": "10月15日" },
+        { "name": "哈利波特·魔法石（英文版）", "type": "悬赏", "points": 700, "icon": "🇬🇧", "deadline": null },
+        { "name": "思考，快与慢", "type": "悬赏", "points": 350, "icon": "🧠", "deadline": null }
+      ]
     },
     {
       "title": "📚 常驻任务", "type": "resident",
       "tasks": [
-        { "name": "哈利波特", "type": "推荐", "points": 100, "icon": "⚡" }
+        { "name": "哈利波特·魔法石", "type": "推荐", "points": 165, "icon": "⚡" },
+        { "name": "活着", "type": "自选", "points": 80, "icon": "📜" },
+        { "name": "三体 I", "type": "自选", "points": 100, "icon": "🌌" },
+        { "name": "平凡的世界 I", "type": "自选", "points": 165, "icon": "🏔" },
+        { "name": "聊斋志异", "type": "自选(协商)", "points": "按篇", "icon": "👻" }
       ]
     }
   ],
