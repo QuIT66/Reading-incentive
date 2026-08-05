@@ -15,273 +15,179 @@
     background:var(--bg); color:var(--text);
     font-family:-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif;
     font-size:14px; line-height:1.5; max-width:480px; margin:0 auto;
-    padding:12px 16px; -webkit-text-size-adjust:100%;
+    padding:0 16px 60px 16px; -webkit-text-size-adjust:100%;
   }
-
-  /* ── Top bar ── */
   .topbar {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:4px 0 8px; font-size:11px; color:var(--muted);
+    position:sticky; top:0; z-index:10; background:var(--bg);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 0; border-bottom:1px solid var(--border); margin-bottom:12px;
   }
-  .refresh-btn {
-    background:var(--card); border:1px solid var(--border);
-    border-radius:6px; padding:6px 14px; font-size:12px; cursor:pointer;
-    color:var(--text);
-  }
-  .refresh-btn:active { background:var(--border); }
-  .sync-ok { color:var(--green); }
-  .sync-off { color:var(--red); }
+  .topbar-left { display:flex; align-items:baseline; gap:8px; }
+  .topbar-exit { background:none; border:1px solid var(--border); border-radius:4px; padding:1px 6px; font-size:14px; cursor:pointer; color:var(--muted); line-height:1; }
+  .topbar-points { font-size:24px; font-weight:800; color:var(--accent); }
+  .topbar-label { font-size:12px; color:var(--muted); }
+  .topbar-right { display:flex; align-items:center; gap:8px; font-size:11px; }
+  .sync-dot { font-size:10px; }
+  .sync-ok { color:var(--green); } .sync-off { color:var(--red); }
+  .sync-time { color:var(--muted); }
+  .refresh-btn { background:none; border:1px solid var(--border); border-radius:4px; padding:3px 8px; font-size:11px; cursor:pointer; color:var(--text); }
 
-  .hero { text-align:center; padding:16px 0 10px; }
-  .hero .points { font-size:72px; font-weight:800; color:var(--accent); line-height:1; }
-  .hero .label { font-size:14px; color:var(--muted); margin-top:4px; }
+  .progress-section { margin-bottom:12px; }
+  .progress-label { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:4px; }
+  .progress-bar { height:6px; background:var(--bar-bg); border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--accent); border-radius:3px; transition:width 0.3s; }
 
-  .detail-toggle { text-align:center; font-size:11px; color:var(--muted); padding:6px; cursor:pointer; user-select:none; }
-  .detail-panel { display:none; margin:0 0 16px; }
+  .detail-toggle { text-align:center; font-size:11px; color:var(--muted); padding:4px; cursor:pointer; user-select:none; margin-bottom:8px; }
+  .detail-panel { display:none; margin-bottom:8px; }
   .detail-panel.open { display:block; }
-  .detail-row { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; font-size:12px; border-bottom:1px solid var(--border); }
+  .detail-row { display:flex; justify-content:space-between; align-items:center; padding:6px 10px; font-size:11px; border-bottom:1px solid var(--border); }
   .detail-row:last-child { border-bottom:none; }
-  .detail-earn { color:var(--green); font-weight:700; }
-  .detail-spend { color:var(--red); font-weight:700; }
-  .detail-name { flex:1; }
-  .detail-date { color:var(--muted); font-size:10px; margin-left:8px; }
+  .detail-earn { color:var(--green); font-weight:700; } .detail-spend { color:var(--red); font-weight:700; }
+  .detail-name { flex:1; } .detail-date { color:var(--muted); font-size:10px; margin-left:6px; }
 
-  .progress-section { margin:10px 0 14px; }
-  .progress-label { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px; }
-  .progress-bar { height:10px; background:var(--bar-bg); border-radius:5px; overflow:hidden; }
-  .progress-fill { height:100%; background:var(--accent); border-radius:5px; transition:width 0.3s; }
-
-  .tabs { display:flex; gap:0; margin-bottom:12px; border-bottom:2px solid var(--border); }
-  .tab { flex:1; text-align:center; padding:10px 0; font-size:12px; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-2px; cursor:pointer; }
-  .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
-
-  .panel { display:none; }
+  .panel { display:none; padding-bottom:70px; }
   .panel.active { display:block; }
-
-  .section-title { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:12px 0 6px; padding-left:6px; border-left:3px solid var(--accent); }
+  .section-title { font-size:11px; color:var(--muted); letter-spacing:1px; margin:10px 0 6px; padding-left:6px; border-left:3px solid var(--accent); }
 
   .card { background:var(--card); border-radius:8px; padding:10px 14px; margin-bottom:6px; display:flex; align-items:center; gap:10px; border:1px solid transparent; }
-  .card-icon { font-size:22px; flex-shrink:0; }
-  .card-info { flex:1; min-width:0; }
-  .card-name { font-size:14px; font-weight:600; }
-  .card-meta { font-size:11px; color:var(--muted); margin-top:2px; }
-  .card-right { flex-shrink:0; text-align:right; }
-  .card-points { font-size:16px; font-weight:700; color:var(--accent); }
-
-  .card.expired { opacity:0.45; }
-  .card.expired .card-points { color:var(--red); }
-  .card.expired .card-name { text-decoration:line-through; }
-  .card.affordable { border-color:var(--green); }
-  .card.affordable .card-points { color:var(--green); }
-  .card.unaffordable { opacity:0.6; }
-  .card.unaffordable .card-name, .card.unaffordable .card-meta { color:#aaa; }
-  .card.unaffordable .card-points { color:#bbb; }
-  .card.pending-challenge { opacity:0.5; border:1px dashed var(--border); }
-  .card.pending-challenge .card-name { color:#aaa; }
-
+  .card-icon { font-size:22px; flex-shrink:0; } .card-info { flex:1; min-width:0; }
+  .card-name { font-size:14px; font-weight:600; } .card-meta { font-size:11px; color:var(--muted); margin-top:2px; }
+  .card-right { flex-shrink:0; text-align:right; } .card-points { font-size:15px; font-weight:700; color:var(--accent); }
+  .card.expired { opacity:0.45; } .card.expired .card-points { color:var(--red); } .card.expired .card-name { text-decoration:line-through; }
+  .card.affordable { border-color:var(--green); } .card.affordable .card-points { color:var(--green); }
+  .card.unaffordable { opacity:0.6; } .card.unaffordable .card-name, .card.unaffordable .card-meta { color:#aaa; } .card.unaffordable .card-points { color:#bbb; }
+  .card.pending-challenge { opacity:0.5; border:1px dashed var(--border); } .card.pending-challenge .card-name { color:#aaa; }
   .deadline { font-size:10px; padding:2px 6px; border-radius:4px; display:inline-block; margin-top:3px; }
-  .deadline.active { background:#fdf3e0; color:var(--accent); }
-  .deadline.soon { background:#fde8e8; color:var(--red); }
-  .deadline.expired { background:#eee; color:#999; }
+  .deadline.active { background:#fdf3e0; color:var(--accent); } .deadline.expired { background:#eee; color:#999; }
+
+  .bottom-tabs {
+    position:fixed; bottom:0; left:0; right:0; max-width:480px; margin:0 auto;
+    display:flex; background:var(--bg); border-top:2px solid var(--border);
+    z-index:10; padding:4px 0; padding-bottom:max(4px, env(safe-area-inset-bottom));
+  }
+  .btab { flex:1; text-align:center; padding:8px 0; font-size:12px; color:var(--muted); cursor:pointer; border:none; background:none; }
+  .btab.active { color:var(--accent); font-weight:700; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <span id="sync-status">🔄 加载中...</span>
-  <button class="refresh-btn" onclick="manualRefresh()">🔄 刷新</button>
+  <div class="topbar-left">
+    <button class="topbar-exit" onclick="window.location='app://exit'">✕</button>
+    <span class="topbar-points" id="points">—</span>
+    <span class="topbar-label">积分</span>
+  </div>
+  <div class="topbar-right">
+    <span id="sync-dot" class="sync-dot sync-off">○</span>
+    <span id="sync-time" class="sync-time">离线</span>
+    <button class="refresh-btn" onclick="manualRefresh()">刷新</button>
+  </div>
 </div>
-
-<div class="hero">
-  <div class="points" id="points">—</div>
-  <div class="label">当前积分</div>
-</div>
-
-<div class="detail-toggle" onclick="toggleDetail()">▸ 积分收支明细</div>
-<div class="detail-panel" id="detail-panel"></div>
 
 <div class="progress-section">
-  <div class="progress-label">
-    <span id="goal-label"></span>
-    <span id="goal-pct"></span>
-  </div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-  </div>
+  <div class="progress-label"><span id="goal-label"></span><span id="goal-pct"></span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
 </div>
-
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('resident')">📚 常驻</div>
-  <div class="tab" onclick="switchTab('bounty')">⏳ 悬赏</div>
-  <div class="tab" onclick="switchTab('challenge')">🏆 挑战</div>
-  <div class="tab" onclick="switchTab('shop')">🛒 商店</div>
-</div>
+<div class="detail-toggle" onclick="toggleDetail()">▸ 收支明细</div>
+<div class="detail-panel" id="detail-panel"></div>
 
 <div class="panel active" id="panel-resident"><div id="resident-list"></div></div>
 <div class="panel" id="panel-bounty"><div id="bounty-list"></div></div>
 <div class="panel" id="panel-challenge"><div id="challenge-list"></div></div>
 <div class="panel" id="panel-shop"><div id="shop-list"></div></div>
 
+<div class="bottom-tabs">
+  <button class="btab active" onclick="switchTab('resident')">📚 常驻</button>
+  <button class="btab" onclick="switchTab('bounty')">⏳ 悬赏</button>
+  <button class="btab" onclick="switchTab('challenge')">🏆 挑战</button>
+  <button class="btab" onclick="switchTab('shop')">🛒 商店</button>
+</div>
+
 <script>
-let DATA = null;
-let P = 0;
-let currentVersion = null;
-let syncTimer = null;
-const POLL_INTERVAL = 60000; // 60 seconds
+let DATA=null, P=0, currentVersion=null;
+const POLL=60000;
 
-// ── Load from cache first, then poll ──
-async function init() {
-  // Try localStorage cache first
-  try {
-    const cached = localStorage.getItem('reading-data');
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (parsed._version) {
-        DATA = parsed;
-        P = DATA.points;
-        currentVersion = parsed._version;
-        render();
-        setSyncStatus('cached');
-      }
-    }
-  } catch(e) {}
-
-  // Fetch fresh
-  await fetchData();
-  // Start polling
-  syncTimer = setInterval(fetchData, POLL_INTERVAL);
+function cardHTML(t,cls,ptsOverride,extra){
+  const pts=ptsOverride||(typeof t.points==='number'?t.points.toLocaleString()+'分':t.points);
+  return `<div class="card ${cls}"><div class="card-icon">${t.icon||'📖'}</div><div class="card-info"><div class="card-name">⬜ ${t.name}</div><div class="card-meta">${t.type||''}任务</div>${extra||''}</div><div class="card-right"><div class="card-points">${pts}</div></div></div>`;
 }
 
-async function fetchData() {
-  try {
-    const r = await fetch('data.json?t=' + Date.now());
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const fresh = await r.json();
-
-    if (currentVersion === null || fresh._version !== currentVersion) {
-      DATA = fresh;
-      P = DATA.points;
-      currentVersion = fresh._version;
-      render();
-      // Save to cache
-      try { localStorage.setItem('reading-data', JSON.stringify(fresh)); } catch(e) {}
-      setSyncStatus('ok');
-    } else {
-      setSyncStatus('ok');
-    }
-  } catch(e) {
-    if (DATA) {
-      setSyncStatus('off');
-    } else {
-      document.getElementById('points').textContent = '离线';
-      setSyncStatus('off');
-    }
-  }
-}
-
-async function manualRefresh() {
-  setSyncStatus('loading');
-  await fetchData();
-}
-
-function setSyncStatus(state) {
-  const el = document.getElementById('sync-status');
-  if (state === 'ok') {
-    const now = new Date();
-    el.innerHTML = '<span class="sync-ok">● 已同步</span> ' +
-      now.getHours().toString().padStart(2,'0') + ':' +
-      now.getMinutes().toString().padStart(2,'0');
-  } else if (state === 'cached') {
-    el.innerHTML = '<span class="sync-off">○ 离线数据</span>';
-  } else if (state === 'off') {
-    el.innerHTML = '<span class="sync-off">○ 连接断开</span>';
-  } else {
-    el.innerHTML = '🔄 更新中...';
-  }
-}
-
-// ── Render ──
-function render() {
-  if (!DATA) return;
-  document.getElementById('points').textContent = P.toLocaleString();
-
-  const g = DATA.goals[0];
-  document.getElementById('goal-label').textContent = g.icon + ' ' + g.name + ' · ' + g.points.toLocaleString();
-  const pct = Math.min(100, (P / g.points * 100)).toFixed(1);
-  document.getElementById('goal-pct').textContent = pct + '%';
-  document.getElementById('progress-fill').style.width = pct + '%';
-
-  // Ledger
-  document.getElementById('detail-panel').innerHTML = (DATA.ledger || []).map(l =>
-    `<div class="detail-row">
-      <span class="detail-name">${l.name}<span class="detail-date">${l.date}</span></span>
-      <span class="${l.amount>0?'detail-earn':'detail-spend'}">${l.amount>0?'+':''}${l.amount}</span>
-    </div>`).join('');
-
-  (DATA.taskGroups || []).forEach(g => {
-    let html = '';
-    if (g.type === 'challenge') {
-      const act = g.groups.activated || [];
-      const pend = g.groups.pending || [];
-      if (act.length) { html += '<div class="section-title">已激活</div>'; act.forEach(c => { html += cardHTML(c, 'affordable'); }); }
-      if (pend.length) { html += '<div class="section-title">待激活</div>'; pend.forEach(c => { html += cardHTML(c, 'pending-challenge'); }); }
-      document.getElementById('challenge-list').innerHTML = html;
-    } else if (g.type === 'bounty') {
-      document.getElementById('bounty-list').innerHTML = (g.tasks || []).map(t => {
-        const cls = t.expired ? 'expired' : '';
-        const pts = t.expired ? '0' : (typeof t.points === 'number' ? t.points.toLocaleString() : t.points);
-        const badge = t.deadline ? (t.expired ? '<span class="deadline expired">已过期</span>' : `<span class="deadline active">${t.deadline} 截止</span>`) : '';
-        return cardHTML(t, cls, pts, badge);
+function render(){
+  if(!DATA)return;
+  document.getElementById('points').textContent=P.toLocaleString();
+  const g=DATA.goals[0];
+  document.getElementById('goal-label').textContent=g.icon+' '+g.name+' · '+g.points.toLocaleString();
+  const pct=Math.min(100,(P/g.points*100)).toFixed(1);
+  document.getElementById('goal-pct').textContent=pct+'%';
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('detail-panel').innerHTML=(DATA.ledger||[]).map(l=>
+    `<div class="detail-row"><span class="detail-name">${l.name}<span class="detail-date">${l.date}</span></span><span class="${l.amount>0?'detail-earn':'detail-spend'}">${l.amount>0?'+':''}${l.amount}</span></div>`
+  ).join('');
+  (DATA.taskGroups||[]).forEach(g=>{
+    let h='';
+    if(g.type==='challenge'){
+      const a=g.groups.activated||[], p=g.groups.pending||[];
+      if(a.length){h+='<div class="section-title">已激活</div>';a.forEach(c=>{h+=cardHTML(c,'affordable');});}
+      if(p.length){h+='<div class="section-title">待激活</div>';p.forEach(c=>{h+=cardHTML(c,'pending-challenge');});}
+      document.getElementById('challenge-list').innerHTML=h;
+    }else if(g.type==='bounty'){
+      document.getElementById('bounty-list').innerHTML=(g.tasks||[]).map(t=>{
+        const cls=t.expired?'expired':'';
+        const pts=t.expired?'0':(typeof t.points==='number'?t.points.toLocaleString():t.points);
+        const badge=t.deadline?(t.expired?'<span class="deadline expired">已过期</span>':`<span class="deadline active">${t.deadline}截止</span>`):'';
+        return cardHTML(t,cls,pts,badge);
       }).join('');
-    } else {
-      document.getElementById('resident-list').innerHTML = (g.tasks || []).map(t =>
-        cardHTML(t, '', typeof t.points === 'number' ? t.points.toLocaleString() + '分' : t.points)
+    }else{
+      document.getElementById('resident-list').innerHTML=(g.tasks||[]).map(t=>
+        cardHTML(t,'',typeof t.points==='number'?t.points.toLocaleString()+'分':t.points)
       ).join('');
     }
   });
-
-  document.getElementById('shop-list').innerHTML = DATA.shop.map(sec => {
-    return `<div class="section-title">${sec.section}</div>` + sec.items.map(s => {
-      const cost = typeof s.cost === 'number' ? s.cost : (s.costNum || 0);
-      const cls = cost > 0 ? (P >= cost ? 'affordable' : 'unaffordable') : '';
-      const costDisplay = typeof s.cost === 'number' ? s.cost.toLocaleString() + ' 分' : s.cost;
-      return `<div class="card ${cls}">
-        <div class="card-icon">${s.icon}</div>
-        <div class="card-info">
-          <div class="card-name">${s.name}</div>
-          ${s.desc ? `<div class="card-meta">${s.desc}</div>` : ''}
-        </div>
-        <div class="card-right"><div class="card-points">${costDisplay}</div></div>
-      </div>`;
-    }).join('');
-  }).join('');
+  document.getElementById('shop-list').innerHTML=DATA.shop.map(sec=>
+    `<div class="section-title">${sec.section}</div>`+sec.items.map(s=>{
+      const cost=typeof s.cost==='number'?s.cost:(s.costNum||0);
+      const cls=cost>0?(P>=cost?'affordable':'unaffordable'):'';
+      return `<div class="card ${cls}"><div class="card-icon">${s.icon}</div><div class="card-info"><div class="card-name">${s.name}</div>${s.desc?`<div class="card-meta">${s.desc}</div>`:''}</div><div class="card-right"><div class="card-points">${typeof s.cost==='number'?s.cost.toLocaleString()+'分':s.cost}</div></div></div>`;
+    }).join('')
+  ).join('');
 }
 
-function cardHTML(t, cls, ptsOverride, extra) {
-  const pts = ptsOverride || (typeof t.points === 'number' ? t.points.toLocaleString() + '分' : t.points);
-  return `<div class="card ${cls}">
-    <div class="card-icon">${t.icon||'📖'}</div>
-    <div class="card-info">
-      <div class="card-name">⬜ ${t.name}</div>
-      <div class="card-meta">${t.type||''}任务</div>
-      ${extra||''}
-    </div>
-    <div class="card-right"><div class="card-points">${pts}</div></div>
-  </div>`;
+function setSync(state){
+  const dot=document.getElementById('sync-dot'), time=document.getElementById('sync-time');
+  if(state==='ok'){dot.className='sync-dot sync-ok';dot.textContent='●';time.textContent=new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});}
+  else if(state==='cached'){dot.className='sync-dot sync-off';dot.textContent='○';time.textContent='缓存';}
+  else if(state==='off'){dot.className='sync-dot sync-off';dot.textContent='○';time.textContent='断开';}
+  else{dot.textContent='⏳';time.textContent='更新中';}
 }
 
-function switchTab(name) {
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+async function fetchData(){
+  try{
+    const r=await fetch('data.json?t='+Date.now());
+    if(!r.ok)throw new Error('HTTP');
+    const fresh=await r.json();
+    if(currentVersion===null||fresh._version!==currentVersion){DATA=fresh;P=DATA.points;currentVersion=fresh._version;render();try{localStorage.setItem('reading-data',JSON.stringify(fresh));}catch(e){}}
+    setSync('ok');
+  }catch(e){if(DATA)setSync('cached');else document.getElementById('points').textContent='离线';}
+}
+
+async function manualRefresh(){setSync('loading');await fetchData();}
+
+async function init(){
+  try{const c=localStorage.getItem('reading-data');if(c){const p=JSON.parse(c);if(p._version){DATA=p;P=DATA.points;currentVersion=p._version;render();setSync('cached');}}}catch(e){}
+  await fetchData();
+  setInterval(fetchData,POLL);
+}
+
+function switchTab(name){
+  document.querySelectorAll('.btab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
-  document.querySelector('.tab[onclick*=\"'+name+'\"]').classList.add('active');
+  document.querySelector('.btab[onclick*=\"'+name+'\"]').classList.add('active');
 }
 
-function toggleDetail() {
-  const p = document.getElementById('detail-panel');
-  const t = document.querySelector('.detail-toggle');
-  p.classList.toggle('open');
-  t.textContent = p.classList.contains('open') ? '▾ 积分收支明细' : '▸ 积分收支明细';
+function toggleDetail(){
+  const p=document.getElementById('detail-panel'),t=document.querySelector('.detail-toggle');
+  p.classList.toggle('open');t.textContent=p.classList.contains('open')?'▾ 收支明细':'▸ 收支明细';
 }
 
 init();
