@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>阅读积分</title>
+<style>
+  :root {
+    --bg: #fff; --card: #f8f8f8; --text: #222; --muted: #888;
+    --accent: #c8860a; --green: #3a8c3a; --red: #c0392b;
+    --border: #ddd; --bar-bg: #eee;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif;
+    font-size:14px; line-height:1.5; max-width:480px; margin:0 auto;
+    padding:12px 16px; -webkit-text-size-adjust:100%;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:4px 0 8px; font-size:11px; color:var(--muted);
+  }
+  .refresh-btn {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:6px; padding:6px 14px; font-size:12px; cursor:pointer;
+    color:var(--text);
+  }
+  .refresh-btn:active { background:var(--border); }
+  .sync-ok { color:var(--green); }
+  .sync-off { color:var(--red); }
+
+  .hero { text-align:center; padding:16px 0 10px; }
+  .hero .points { font-size:72px; font-weight:800; color:var(--accent); line-height:1; }
+  .hero .label { font-size:14px; color:var(--muted); margin-top:4px; }
+
+  .detail-toggle { text-align:center; font-size:11px; color:var(--muted); padding:6px; cursor:pointer; user-select:none; }
+  .detail-panel { display:none; margin:0 0 16px; }
+  .detail-panel.open { display:block; }
+  .detail-row { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; font-size:12px; border-bottom:1px solid var(--border); }
+  .detail-row:last-child { border-bottom:none; }
+  .detail-earn { color:var(--green); font-weight:700; }
+  .detail-spend { color:var(--red); font-weight:700; }
+  .detail-name { flex:1; }
+  .detail-date { color:var(--muted); font-size:10px; margin-left:8px; }
+
+  .progress-section { margin:10px 0 14px; }
+  .progress-label { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px; }
+  .progress-bar { height:10px; background:var(--bar-bg); border-radius:5px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--accent); border-radius:5px; transition:width 0.3s; }
+
+  .tabs { display:flex; gap:0; margin-bottom:12px; border-bottom:2px solid var(--border); }
+  .tab { flex:1; text-align:center; padding:10px 0; font-size:12px; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-2px; cursor:pointer; }
+  .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+  .panel { display:none; }
+  .panel.active { display:block; }
+
+  .section-title { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:12px 0 6px; padding-left:6px; border-left:3px solid var(--accent); }
+
+  .card { background:var(--card); border-radius:8px; padding:10px 14px; margin-bottom:6px; display:flex; align-items:center; gap:10px; border:1px solid transparent; }
+  .card-icon { font-size:22px; flex-shrink:0; }
+  .card-info { flex:1; min-width:0; }
+  .card-name { font-size:14px; font-weight:600; }
+  .card-meta { font-size:11px; color:var(--muted); margin-top:2px; }
+  .card-right { flex-shrink:0; text-align:right; }
+  .card-points { font-size:16px; font-weight:700; color:var(--accent); }
+
+  .card.expired { opacity:0.45; }
+  .card.expired .card-points { color:var(--red); }
+  .card.expired .card-name { text-decoration:line-through; }
+  .card.affordable { border-color:var(--green); }
+  .card.affordable .card-points { color:var(--green); }
+  .card.unaffordable { opacity:0.6; }
+  .card.unaffordable .card-name, .card.unaffordable .card-meta { color:#aaa; }
+  .card.unaffordable .card-points { color:#bbb; }
+  .card.pending-challenge { opacity:0.5; border:1px dashed var(--border); }
+  .card.pending-challenge .card-name { color:#aaa; }
+
+  .deadline { font-size:10px; padding:2px 6px; border-radius:4px; display:inline-block; margin-top:3px; }
+  .deadline.active { background:#fdf3e0; color:var(--accent); }
+  .deadline.soon { background:#fde8e8; color:var(--red); }
+  .deadline.expired { background:#eee; color:#999; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span id="sync-status">🔄 加载中...</span>
+  <button class="refresh-btn" onclick="manualRefresh()">🔄 刷新</button>
+</div>
+
+<div class="hero">
+  <div class="points" id="points">—</div>
+  <div class="label">当前积分</div>
+</div>
+
+<div class="detail-toggle" onclick="toggleDetail()">▸ 积分收支明细</div>
+<div class="detail-panel" id="detail-panel"></div>
+
+<div class="progress-section">
+  <div class="progress-label">
+    <span id="goal-label"></span>
+    <span id="goal-pct"></span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('resident')">📚 常驻</div>
+  <div class="tab" onclick="switchTab('bounty')">⏳ 悬赏</div>
+  <div class="tab" onclick="switchTab('challenge')">🏆 挑战</div>
+  <div class="tab" onclick="switchTab('shop')">🛒 商店</div>
+</div>
+
+<div class="panel active" id="panel-resident"><div id="resident-list"></div></div>
+<div class="panel" id="panel-bounty"><div id="bounty-list"></div></div>
+<div class="panel" id="panel-challenge"><div id="challenge-list"></div></div>
+<div class="panel" id="panel-shop"><div id="shop-list"></div></div>
+
+<script>
+let DATA = null;
+let P = 0;
+let currentVersion = null;
+let syncTimer = null;
+const POLL_INTERVAL = 60000; // 60 seconds
+
+// ── Load from cache first, then poll ──
+async function init() {
+  // Try localStorage cache first
+  try {
+    const cached = localStorage.getItem('reading-data');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed._version) {
+        DATA = parsed;
+        P = DATA.points;
+        currentVersion = parsed._version;
+        render();
+        setSyncStatus('cached');
+      }
+    }
+  } catch(e) {}
+
+  // Fetch fresh
+  await fetchData();
+  // Start polling
+  syncTimer = setInterval(fetchData, POLL_INTERVAL);
+}
+
+async function fetchData() {
+  try {
+    const r = await fetch('data.json?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const fresh = await r.json();
+
+    if (currentVersion === null || fresh._version !== currentVersion) {
+      DATA = fresh;
+      P = DATA.points;
+      currentVersion = fresh._version;
+      render();
+      // Save to cache
+      try { localStorage.setItem('reading-data', JSON.stringify(fresh)); } catch(e) {}
+      setSyncStatus('ok');
+    } else {
+      setSyncStatus('ok');
+    }
+  } catch(e) {
+    if (DATA) {
+      setSyncStatus('off');
+    } else {
+      document.getElementById('points').textContent = '离线';
+      setSyncStatus('off');
+    }
+  }
+}
+
+async function manualRefresh() {
+  setSyncStatus('loading');
+  await fetchData();
+}
+
+function setSyncStatus(state) {
+  const el = document.getElementById('sync-status');
+  if (state === 'ok') {
+    const now = new Date();
+    el.innerHTML = '<span class="sync-ok">● 已同步</span> ' +
+      now.getHours().toString().padStart(2,'0') + ':' +
+      now.getMinutes().toString().padStart(2,'0');
+  } else if (state === 'cached') {
+    el.innerHTML = '<span class="sync-off">○ 离线数据</span>';
+  } else if (state === 'off') {
+    el.innerHTML = '<span class="sync-off">○ 连接断开</span>';
+  } else {
+    el.innerHTML = '🔄 更新中...';
+  }
+}
+
+// ── Render ──
+function render() {
+  if (!DATA) return;
+  document.getElementById('points').textContent = P.toLocaleString();
+
+  const g = DATA.goals[0];
+  document.getElementById('goal-label').textContent = g.icon + ' ' + g.name + ' · ' + g.points.toLocaleString();
+  const pct = Math.min(100, (P / g.points * 100)).toFixed(1);
+  document.getElementById('goal-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // Ledger
+  document.getElementById('detail-panel').innerHTML = (DATA.ledger || []).map(l =>
+    `<div class="detail-row">
+      <span class="detail-name">${l.name}<span class="detail-date">${l.date}</span></span>
+      <span class="${l.amount>0?'detail-earn':'detail-spend'}">${l.amount>0?'+':''}${l.amount}</span>
+    </div>`).join('');
+
+  (DATA.taskGroups || []).forEach(g => {
+    let html = '';
+    if (g.type === 'challenge') {
+      const act = g.groups.activated || [];
+      const pend = g.groups.pending || [];
+      if (act.length) { html += '<div class="section-title">已激活</div>'; act.forEach(c => { html += cardHTML(c, 'affordable'); }); }
+      if (pend.length) { html += '<div class="section-title">待激活</div>'; pend.forEach(c => { html += cardHTML(c, 'pending-challenge'); }); }
+      document.getElementById('challenge-list').innerHTML = html;
+    } else if (g.type === 'bounty') {
+      document.getElementById('bounty-list').innerHTML = (g.tasks || []).map(t => {
+        const cls = t.expired ? 'expired' : '';
+        const pts = t.expired ? '0' : (typeof t.points === 'number' ? t.points.toLocaleString() : t.points);
+        const badge = t.deadline ? (t.expired ? '<span class="deadline expired">已过期</span>' : `<span class="deadline active">${t.deadline} 截止</span>`) : '';
+        return cardHTML(t, cls, pts, badge);
+      }).join('');
+    } else {
+      document.getElementById('resident-list').innerHTML = (g.tasks || []).map(t =>
+        cardHTML(t, '', typeof t.points === 'number' ? t.points.toLocaleString() + '分' : t.points)
+      ).join('');
+    }
+  });
+
+  document.getElementById('shop-list').innerHTML = DATA.shop.map(sec => {
+    return `<div class="section-title">${sec.section}</div>` + sec.items.map(s => {
+      const cost = typeof s.cost === 'number' ? s.cost : (s.costNum || 0);
+      const cls = cost > 0 ? (P >= cost ? 'affordable' : 'unaffordable') : '';
+      const costDisplay = typeof s.cost === 'number' ? s.cost.toLocaleString() + ' 分' : s.cost;
+      return `<div class="card ${cls}">
+        <div class="card-icon">${s.icon}</div>
+        <div class="card-info">
+          <div class="card-name">${s.name}</div>
+          ${s.desc ? `<div class="card-meta">${s.desc}</div>` : ''}
+        </div>
+        <div class="card-right"><div class="card-points">${costDisplay}</div></div>
+      </div>`;
+    }).join('');
+  }).join('');
+}
+
+function cardHTML(t, cls, ptsOverride, extra) {
+  const pts = ptsOverride || (typeof t.points === 'number' ? t.points.toLocaleString() + '分' : t.points);
+  return `<div class="card ${cls}">
+    <div class="card-icon">${t.icon||'📖'}</div>
+    <div class="card-info">
+      <div class="card-name">⬜ ${t.name}</div>
+      <div class="card-meta">${t.type||''}任务</div>
+      ${extra||''}
+    </div>
+    <div class="card-right"><div class="card-points">${pts}</div></div>
+  </div>`;
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelector('.tab[onclick*=\"'+name+'\"]').classList.add('active');
+}
+
+function toggleDetail() {
+  const p = document.getElementById('detail-panel');
+  const t = document.querySelector('.detail-toggle');
+  p.classList.toggle('open');
+  t.textContent = p.classList.contains('open') ? '▾ 积分收支明细' : '▸ 积分收支明细';
+}
+
+init();
+</script>
+</body>
+</html>
