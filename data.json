@@ -1,5 +1,5 @@
 {
-  "_version": 5,
+  "_version": 6,
   "points": 0,
   "goals": [
     { "name": "小米手机", "icon": "📱", "points": 10000 }
@@ -37,7 +37,8 @@
       "tasks": [
         { "name": "活着", "type": "推荐", "points": 110, "icon": "📜" },
         { "name": "三体 I", "type": "推荐", "points": 180, "icon": "🌌" },
-        { "name": "平凡的世界 I", "type": "推荐", "points": 300, "icon": "🏔" }
+        { "name": "平凡的世界 I", "type": "推荐", "points": 300, "icon": "🏔" },
+        { "name": "唯有医生看透的人性", "type": "自选", "points": 146, "icon": "🩺" }
       ]
     }
   ],
