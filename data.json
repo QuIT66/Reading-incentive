@@ -1,66 +1,243 @@
 {
-  "_version": 6,
-  "points": 0,
+  "_version": 7,
+  "points": 146,
   "goals": [
-    { "name": "小米手机", "icon": "📱", "points": 10000 }
+    {
+      "name": "小米手机",
+      "icon": "📱",
+      "points": 10000
+    }
   ],
-  "ledger": [],
+  "ledger": [
+    {
+      "name": "唯有医生看透的人性",
+      "date": "8/11",
+      "amount": 146
+    }
+  ],
   "taskGroups": [
     {
-      "title": "🏆 挑战", "type": "challenge",
+      "title": "🏆 挑战",
+      "type": "challenge",
       "groups": {
         "activated": [],
         "pending": [
-          { "name": "年级第 1 名", "type": "考试", "detail": "10000分", "points": 10000, "icon": "🥇" },
-          { "name": "年级第 2 名", "type": "考试", "detail": "5000分", "points": 5000, "icon": "🥈" },
-          { "name": "年级第 3 名", "type": "考试", "detail": "4500分", "points": 4500, "icon": "🥉" },
-          { "name": "年级前 10 名", "type": "考试", "detail": "1500~3500分", "points": "1500~3500", "icon": "🏅" },
-          { "name": "年级前 100 名", "type": "考试", "detail": "110~1000分", "points": "110~1000", "icon": "🏅" },
-          { "name": "年级前 200 名", "type": "考试", "detail": "100~400分", "points": "100~400", "icon": "🏅" },
-          { "name": "进步 50+ 名", "type": "进步奖", "detail": "500分", "points": 500, "icon": "📈" },
-          { "name": "班长", "type": "每月", "detail": "300分/月", "points": 300, "icon": "👑" },
-          { "name": "其他班委/课代表", "type": "每月", "detail": "150分/月", "points": 150, "icon": "📋" },
-          { "name": "校级竞赛获奖", "type": "竞赛", "detail": "500~2000分", "points": "500~2000", "icon": "🥇" }
+          {
+            "name": "年级第 1 名",
+            "type": "考试",
+            "detail": "10000分",
+            "points": 10000,
+            "icon": "🥇"
+          },
+          {
+            "name": "年级第 2 名",
+            "type": "考试",
+            "detail": "5000分",
+            "points": 5000,
+            "icon": "🥈"
+          },
+          {
+            "name": "年级第 3 名",
+            "type": "考试",
+            "detail": "4500分",
+            "points": 4500,
+            "icon": "🥉"
+          },
+          {
+            "name": "年级前 10 名",
+            "type": "考试",
+            "detail": "1500~3500分",
+            "points": "1500~3500",
+            "icon": "🏅"
+          },
+          {
+            "name": "年级前 100 名",
+            "type": "考试",
+            "detail": "110~1000分",
+            "points": "110~1000",
+            "icon": "🏅"
+          },
+          {
+            "name": "年级前 200 名",
+            "type": "考试",
+            "detail": "100~400分",
+            "points": "100~400",
+            "icon": "🏅"
+          },
+          {
+            "name": "进步 50+ 名",
+            "type": "进步奖",
+            "detail": "500分",
+            "points": 500,
+            "icon": "📈"
+          },
+          {
+            "name": "班长",
+            "type": "每月",
+            "detail": "300分/月",
+            "points": 300,
+            "icon": "👑"
+          },
+          {
+            "name": "其他班委/课代表",
+            "type": "每月",
+            "detail": "150分/月",
+            "points": 150,
+            "icon": "📋"
+          },
+          {
+            "name": "校级竞赛获奖",
+            "type": "竞赛",
+            "detail": "500~2000分",
+            "points": "500~2000",
+            "icon": "🥇"
+          }
         ]
       }
     },
     {
-      "title": "⏳ 悬赏任务", "type": "bounty",
+      "title": "⏳ 悬赏任务",
+      "type": "bounty",
       "tasks": [
-        { "name": "哈利波特·魔法石", "type": "限时", "points": 220, "icon": "⚡", "deadline": "10月15日" },
-        { "name": "哈利波特·魔法石（英文版）", "type": "悬赏", "points": 700, "icon": "🇬🇧", "deadline": null },
-        { "name": "思考，快与慢", "type": "悬赏", "points": 350, "icon": "🧠", "deadline": null }
+        {
+          "name": "哈利波特·魔法石",
+          "type": "限时",
+          "points": 220,
+          "icon": "⚡",
+          "deadline": "10月15日"
+        },
+        {
+          "name": "哈利波特·魔法石（英文版）",
+          "type": "悬赏",
+          "points": 700,
+          "icon": "🇬🇧",
+          "deadline": null
+        },
+        {
+          "name": "思考，快与慢",
+          "type": "悬赏",
+          "points": 350,
+          "icon": "🧠",
+          "deadline": null
+        }
       ]
     },
     {
-      "title": "📚 常驻任务", "type": "resident",
+      "title": "📚 常驻任务",
+      "type": "resident",
       "tasks": [
-        { "name": "活着", "type": "推荐", "points": 110, "icon": "📜" },
-        { "name": "三体 I", "type": "推荐", "points": 180, "icon": "🌌" },
-        { "name": "平凡的世界 I", "type": "推荐", "points": 300, "icon": "🏔" },
-        { "name": "唯有医生看透的人性", "type": "自选", "points": 146, "icon": "🩺" }
+        {
+          "name": "活着",
+          "type": "推荐",
+          "points": 110,
+          "icon": "📜"
+        },
+        {
+          "name": "三体 I",
+          "type": "推荐",
+          "points": 180,
+          "icon": "🌌"
+        },
+        {
+          "name": "平凡的世界 I",
+          "type": "推荐",
+          "points": 300,
+          "icon": "🏔"
+        },
+        {
+          "name": "唯有医生看透的人性",
+          "type": "自选",
+          "points": 146,
+          "icon": "🩺"
+        }
       ]
     }
   ],
   "shop": [
-    { "section": "🍔 食", "items": [
-      { "name": "辣条 / 雪糕 / 奶茶", "icon": "🍬", "cost": "5~30", "costNum": 0 },
-      { "name": "麦当劳 / 外卖", "icon": "🍔", "cost": "50~150", "costNum": 0 },
-      { "name": "火锅 / 烤肉", "icon": "🍲", "cost": "200~400", "costNum": 0 }
-    ]},
-    { "section": "🎁 物", "items": [
-      { "name": "一本书", "icon": "📖", "cost": 100 },
-      { "name": "电影票", "icon": "🎬", "cost": 200 },
-      { "name": "品牌运动鞋", "icon": "👟", "cost": 1000 },
-      { "name": "拼豆图纸程序", "icon": "🎨", "cost": 2000 },
-      { "name": "降噪耳机", "icon": "🎧", "cost": 3500 },
-      { "name": "短途旅行", "icon": "🎢", "cost": 5000 },
-      { "name": "小米平板", "icon": "📋", "cost": 7000 },
-      { "name": "小米手机 / 电脑", "icon": "💻", "cost": 10000 }
-    ]},
-    { "section": "🔓 系统", "items": [
-      { "name": "任务系统 v2.0 预览", "icon": "👁", "cost": 500, "desc": "查看高级任务详情" },
-      { "name": "任务系统 v2.0 激活", "icon": "🔓", "cost": 1500, "desc": "永久解锁接取权" }
-    ]}
+    {
+      "section": "🍔 食",
+      "items": [
+        {
+          "name": "辣条 / 雪糕 / 奶茶",
+          "icon": "🍬",
+          "cost": "5~30",
+          "costNum": 0
+        },
+        {
+          "name": "麦当劳 / 外卖",
+          "icon": "🍔",
+          "cost": "50~150",
+          "costNum": 0
+        },
+        {
+          "name": "火锅 / 烤肉",
+          "icon": "🍲",
+          "cost": "200~400",
+          "costNum": 0
+        }
+      ]
+    },
+    {
+      "section": "🎁 物",
+      "items": [
+        {
+          "name": "一本书",
+          "icon": "📖",
+          "cost": 100
+        },
+        {
+          "name": "电影票",
+          "icon": "🎬",
+          "cost": 200
+        },
+        {
+          "name": "品牌运动鞋",
+          "icon": "👟",
+          "cost": 1000
+        },
+        {
+          "name": "拼豆图纸程序",
+          "icon": "🎨",
+          "cost": 2000
+        },
+        {
+          "name": "降噪耳机",
+          "icon": "🎧",
+          "cost": 3500
+        },
+        {
+          "name": "短途旅行",
+          "icon": "🎢",
+          "cost": 5000
+        },
+        {
+          "name": "小米平板",
+          "icon": "📋",
+          "cost": 7000
+        },
+        {
+          "name": "小米手机 / 电脑",
+          "icon": "💻",
+          "cost": 10000
+        }
+      ]
+    },
+    {
+      "section": "🔓 系统",
+      "items": [
+        {
+          "name": "任务系统 v2.0 预览",
+          "icon": "👁",
+          "cost": 500,
+          "desc": "查看高级任务详情"
+        },
+        {
+          "name": "任务系统 v2.0 激活",
+          "icon": "🔓",
+          "cost": 1500,
+          "desc": "永久解锁接取权"
+        }
+      ]
+    }
   ]
 }
