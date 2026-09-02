@@ -1,5 +1,5 @@
 {
-  "_version": 7,
+  "_version": 8,
   "points": 146,
   "goals": [
     {
@@ -20,7 +20,15 @@
       "title": "🏆 挑战",
       "type": "challenge",
       "groups": {
-        "activated": [],
+        "activated": [
+          {
+            "name": "其他班委/课代表",
+            "type": "每月",
+            "detail": "150分/月",
+            "points": 150,
+            "icon": "📋"
+          }
+        ],
         "pending": [
           {
             "name": "年级第 1 名",
@@ -77,13 +85,6 @@
             "detail": "300分/月",
             "points": 300,
             "icon": "👑"
-          },
-          {
-            "name": "其他班委/课代表",
-            "type": "每月",
-            "detail": "150分/月",
-            "points": 150,
-            "icon": "📋"
           },
           {
             "name": "校级竞赛获奖",
